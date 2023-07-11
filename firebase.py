@@ -15,6 +15,5 @@ def initialize_firebase():
     "appId": os.getenv('appId'),
     "databaseURL": os.getenv('databaseURL')
     };
-    print(firebaseConfig)
 
     return pyrebase.initialize_app(firebaseConfig)

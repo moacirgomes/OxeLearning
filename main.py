@@ -18,6 +18,7 @@ app = Flask(__name__)
 def index():
   return jsonify({"response":"Backend Oxe Learning"}), 201
 
+# Endpoint para cadastro de usuário
 @app.route('/signUp', methods=['POST'])
 def signup():
   if request.form.get('user') and request.form.get('password'):
@@ -44,6 +45,7 @@ def signup():
       "message":"User ou Password não enviados"
     }), 400
 
+# Endpoint para login
 @app.route('/login', methods=['POST'])
 def login():
   if request.form.get('user') and request.form.get('password'):
@@ -70,6 +72,7 @@ def login():
       "message":"User ou Password não enviados"
     }), 400
 
+# Endpoint para upload de arquivos
 @app.route('/uploadFile', methods=['POST'])
 def upload_file():
   # Verifica se um arquivo foi enviado na requisição
@@ -101,6 +104,7 @@ def upload_file():
       "message": f"Erro ao realizar o Upload do arquivo: {response.text}"
     }), 500
 
+# Endpoint para interação com o arquivo
 @app.route('/chatMessage', methods=['POST'])
 def chat_message():
   if request.form.get('message') and request.form.get('sourceId'):
@@ -130,6 +134,9 @@ def chat_message():
     else:
         print('Status:', response.status_code)
         print('Error:', response.text)
+        return jsonify({
+          "message": f"Erro ao enviar mensagem: {response.text}"
+        }), 500
   else:
     return jsonify({
       "message":"mensagem ou sourceId do arquivo não enviados"
