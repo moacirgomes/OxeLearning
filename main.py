@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 from firebase import initialize_firebase
 import requests
@@ -8,6 +8,7 @@ import os
 #Carregando as variáveis de ambiente
 load_dotenv()
 
+#iniciando conexão com o firebase
 firebase = initialize_firebase()
 auth = firebase.auth()
 
@@ -90,6 +91,7 @@ def upload_file():
   if response.status_code == 200:
     return jsonify({
       "message":"Arquivo enviado com sucesso",
+      "file": file.filename,
       "sourceId": response.json()['sourceId']
     }), 201
   else:
@@ -98,6 +100,40 @@ def upload_file():
     return jsonify({
       "message": f"Erro ao realizar o Upload do arquivo: {response.text}"
     }), 500
+
+@app.route('/chatMessage', methods=['POST'])
+def chat_message():
+  if request.form.get('message') and request.form.get('sourceId'):
+    headers = {
+      "x-api-key": os.getenv('chatPDF_KEY'),
+      "Content-Type": "application/json",
+    }
+
+    data = {
+        'sourceId': request.form.get('sourceId'),
+        'messages': [
+            {
+                'role': "user",
+                'content': request.form.get('message'),
+            }
+        ]
+    }
+
+    response = requests.post('https://api.chatpdf.com/v1/chats/message', headers=headers, json=data, verify=False)
+
+    if response.status_code == 200:
+        print('Result:', response.json()['content'])
+        return jsonify({
+          "message":"Resposta Obtida com sucesso",
+          "response": response.json()['content']
+        }), 200
+    else:
+        print('Status:', response.status_code)
+        print('Error:', response.text)
+  else:
+    return jsonify({
+      "message":"mensagem ou sourceId do arquivo não enviados"
+    }), 400
 
 # Inicia a API
 app.run(host='0.0.0.0', port=81)
