@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tela Principal</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="static/css/brootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="static/css/style_user.css" />
+  </head>
+  <body>
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-dark"
+      style="z-index: 1001"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('index') }}">
+          <img src="../static/img/home.png" alt="OxeLearning" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse text-light"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active text-light"
+                aria-current="page"
+                href="{{ url_for('index') }}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">Perguntas Frequentes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">SAC</a>
+            </li>
+          </ul>
+           <a class="nav-link text-light" href="{{ url_for('login') }}">Login Gestão</a> 
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div
+          id="opcao-pesquisa"
+          class=" p-4 d-flex justify-content-center align-items-center position-relative w-100 center-content"
+        >
+          <div class="text-light">
+            <img src="../static/img/logo.png" alt="OxeLearning" />
+            <h1 class="p-2">OxeLearning</h1>
+            <p class="bnZtLN">
+              Realize consultas e resumos dos documentos da sua instituição de
+              maneira mais rápida e fácil.
+            </p>
+          </div>
+          <div class="d-flex flex-row justify-content-center ">
+            <form id="search-form">
+              <div class="input-group">
+                <input
+                  type="text"
+                  id="search-input"
+                  name="search"
+                  placeholder="Digite aqui"
+                  class="form-control"
+                />
+                <button type="button" id="clear-button" class="clear-button">
+                  &#10005;
+                </button>
+                <button
+                  type="submit"
+                  id="search-button"
+                  class="btn btn-primary"
+                >
+                  Pesquisar
+                </button>
+              </div>
+            </form>
+            
+          </div>
+          <div id="loading" class="d-none text-white mt-4">
+            <div class="spinner-grow" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 offset-md-2 mt-3">
+          <div id="historico" class="overflow-auto h-100 mb-4 p-3 custom-scrollbar" style="max-height: 500px;">
+            <!-- Seu conteúdo aqui -->
+            <div id="historico" class="mt-3">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="static/js/script.js"></script>
+  </body>
+</html>
