@@ -1,3 +1,6 @@
 venv
 __pycache__
-.env
+.replit
+replit.nix
+pyproject.toml
+models/oxelearning-firebase-adminsdk.json
