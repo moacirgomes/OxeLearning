@@ -1,0 +1,53 @@
+body {
+    background-color: #140f1c;
+    color: white;
+    margin: 0;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.card {
+    color: white;
+    background: rgb(32, 32, 36);
+    width: 100%;
+    max-width: 400px;
+}
+
+.card-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.img-centralizada {
+    width: 150px; /* Ajuste o tamanho conforme necessário */
+    border-radius: 50%; /* Adicione bordas redondas */
+    margin: 0 auto; /* Centralize horizontalmente */
+    display: block;
+}
+
+.bnZtLN {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(130, 87, 230);
+    margin: 8px 0px 24px;
+    opacity: 0.8;
+    transition: opacity 0.2s ease 0s;
+    align-self: flex-start;
+}
+
+.bnZtLN a:hover {
+    background-color: #6b44c2;
+}
+
+
+.btn-primary:disabled {
+    background-color: #6b44c2;
+    opacity: 0.5;
+    cursor: not-allowed;
+}

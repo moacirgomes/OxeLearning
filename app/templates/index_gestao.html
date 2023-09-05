@@ -1,147 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title class="text-light">Tabela com Filtro</title>
-    <!-- Include Bootstrap CSS and JS links -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
-    <link rel="stylesheet" type="text/css" href="static/css/brootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="text-light">Tabela com Filtro</title>
+  <!-- Include Bootstrap CSS and JS links -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+  <link rel="stylesheet" type="text/css" href="static/css/brootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="static/css/style.css" />
 </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="z-index: 1001">
-      <div class="container-fluid">
-          <a class="navbar-brand" href="{{ url_for('index') }}">
-          <img src="../static/img/home.png" alt="OxeLearning" />
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse text-light" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg">
-            <li class="nav-item">
-              <a class="nav-link active text-light" aria-current="page"
-                href="{{ url_for('index') }}">Home</a>
-
-            <li class="nav-item">
-              <a class="nav-link text-light" href="#">Perguntas Frequentes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="#">SAC</a>
-            </li>
+<body>
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="z-index: 1001">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('index') }}">
+        <img src="../static/img/home.png" alt="OxeLearning" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-light" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg">
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="{{ url_for('index') }}">Home</a>
+          </li>
+          {% if 'user_data' in session and session['user_data'] and is_admin %}
+              <li class="nav-item"><a class="nav-link text-light" href="{{ url_for('cadastrar') }}">Cadastrar Gestor</a></li>
+          {% endif %}
+                    <!-- <li class="nav-item">
+            <a class="nav-link text-light" href="#">Perguntas Frequentes</a>
+          </li> --> 
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">SAC</a>
+          </li>
+        </ul>
+        <!-- Move the user dropdown and its associated buttons here -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static"
+            aria-expanded="true">
+            <i class="fas fa-user fa-2x"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg bg-dark">
+          <!--  <li><a class="dropdown-item bg-dark text-light" href="#" data-bs-toggle="modal" data-bs-target="#passwordChangeModal">Alterar Senha</a></li> -->
+            <li><a class="dropdown-item bg-dark text-light" href="{{ url_for('logout') }}">Sair</a></li>
           </ul>
-          <div class="btn-group">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-              data-bs-display="static" aria-expanded="true">
-              <i class="fas fa-user fa-2x"></i>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg">
-              <li><a class="dropdown-item" href="#">Alterar Senha</a></li>
-              <li><a class="dropdown-item" href="#">Cadastrar Gestor</a></li>
-              <li><a class="dropdown-item" href="{{ url_for('logout') }}">Sair</a></li>
-            </ul>
-          </div>
         </div>
+        <!-- ... rest of the code ... -->
       </div>
-    </nav>
-    <div class="container">
-      <div class="card-container">
-        <div class="card p-5 rounded">
-          <input type="text" id="filtro" class="form-control mb-3" placeholder="Filtrar por nome do arquivo">
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Nome do Arquivo</th>
-                <th class="text-center">Ações</th>
-              </tr>
-            </thead>
-            <tbody id="tabela-corpo">
-              {% for arquivo in arquivos.files %}
-                <tr>
-                    <td>{{ arquivo.name }}</td>
-                    <td class="btn-cell">
-                      <form action="{{ url_for('deletar', id=arquivo.sourceID) }}" method="post" style="display: inline;">
-                          <button class="btn btn-primary btn-sm" type="button">Editar</button>
-                          <button class="btn btn-danger btn-sm" type="submit">Remover</button>
-                      </form>
-                  </td>                  
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          <div class="d-flex justify-content-end mt-1">
-            <button class="btn btn-primary" id="btnCadastrar">Adicionar</button>
-          </div>
-          {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <div class="mb-2"></div>
-              <div id="flash-message" class="alert alert-info">
-                {{ messages[0] }}
-                <button id="close-button" type="button" class="btn-close my-1 me-3" style="position: absolute; right: 0;  font-size: 0.75rem; " aria-label="Fechar"></button>
-              </div>
-            {% endif %}
-          {% endwith %}
-          <!-- Modal for Cadastro -->
-          <div class="  modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-              <form action="/cadastro_arquivo"  method="POST" enctype="multipart/form-data">
+    </div>
+  </nav>
+  <div class="container">
+    <div class="card-container">
+      <div class="card p-5 rounded">
+        
+        <input type="text" id="filtro" class="form-control mb-3" placeholder="Filtrar por nome do arquivo">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Nome do Arquivo</th>
+              <!-- <th class="text-center">Editar</th> -->
+              <th class="text-center">Excluir</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-corpo">
+            {% for arquivo in arquivos.files %}
+            <tr>
+              <td>{{ arquivo.name }}</td>
+            <!--  <td class="btn-cell">
+                <a class="btn btn-primary btn-sm editar-arquivo" data-bs-toggle="modal" data-bs-target="#editarModal"
+                  data-nome="{{ arquivo.name }}">
+                  <i class="fas fa-pencil-alt"></i>
+                </a>
+              </td> -->
 
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="cadastroModalLabel">Cadastrar Novo Arquivo</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+              <td class="text-center">
+                <form action="{{ url_for('deletar', id=arquivo.sourceID) }}" method="post" style="display: inline;">
+                  <button class="btn btn-danger btn-sm " type="submit">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+                
+        </table>
+        <div class="d-flex justify-content-end mt-1">
+          <button class="btn btn-primary" id="btnCadastrar">Adicionar</button>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="mb-2"></div>
+        <div id="flash-message" class="alert {% if 'Selecione um Arquivo ' in messages[0] %}alert-warning{% else %}alert-success{% endif %}">
+          {{ messages[0] }}
+          <button id="close-button" type="button" class="btn-close my-1 me-3"
+            style="position: absolute; right: 0;  font-size: 0.75rem; " aria-label="Fechar"></button>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <!-- Modal for Cadastro -->
+        <div class="  modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <form action="/cadastro_arquivo" method="POST" enctype="multipart/form-data">
+
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="cadastroModalLabel">Cadastrar Novo Arquivo</h5>
+                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="nomeArquivo">Nome do Arquivo:</label>
+                    <input type="text" required class="form-control" name="nomeArquivo" id="nomeArquivo"
+                      placeholder="Digite o nome do arquivo">
                   </div>
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <label for="nomeArquivo">Nome do Arquivo:</label>
-                      <input type="text" required class="form-control" name="nomeArquivo" id="nomeArquivo" placeholder="Digite o nome do arquivo">
-                    </div>
-                    <div class="form-group">
-                      <label for="fileInput">Selecione um arquivo:</label>
-                      <input type="file" required name="file" class="form-control" id="fileInput" accept=".pdf">
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" id="btnSalvar">Salvar</button>
+                  <div class="form-group">
+                    <label for="fileInput">Selecione um arquivo:</label>
+                    <input type="file" required name="file" class="form-control" id="fileInput" accept=".pdf">
                   </div>
                 </div>
-              </form>
-            </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary" id="btnSalvar">Salvar</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-    <script>
-      // Função para fechar a mensagem
-      function closeMessage() {
-        var flashMessage = document.getElementById('flash-message');
-        flashMessage.style.display = 'none';
-      }
-
-      // Fecha automaticamente após 5 segundos
-      setTimeout(function() {
-        closeMessage();
-      }, 5000); // 5000 milissegundos = 5 segundos
-
-      // Associar função de fechar ao botão
-      var closeButton = document.getElementById('close-button');
-      closeButton.addEventListener('click', closeMessage);
-    </script>
-    <script src="static/css/brootstrap/js/bootstrap.bundle.js"></script>
-    <script src="../static/js/main.js"></script>
-  </body>
+  </div>
+  <script src="static/css/brootstrap/js/bootstrap.bundle.js"></script>
+  <script src="../static/js/main.js"></script>
+  <script src="../static/js/time.js"></script>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script src="../static/js/libras.js"></script>
+</body>
 </html>

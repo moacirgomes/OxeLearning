@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações de Contato</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tela Principal</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="static/css/brootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="static/css/style_user.css" />
+</head>
+<body>
+    <div style="background-color: #343a40">
+        <div style="padding: 0 15px; display: flex; justify-content: space-between;" class="container-fluid">
+          <a href="{{ url_for('index') }}">
+            <img src="../static/img/home.png" alt="OxeLearning" />
+          </a>
+          <div style="display: flex; align-items: center;">
+            <ul style="list-style: none; margin: 0; padding: 0; display: flex; gap: 20px;">
+              <li>
+                <a style="color: white;" aria-current="page" href="{{ url_for('index') }}">Home</a>
+              </li>
+              <li>
+                <a style="color: white;" href="#">Perguntas Frequentes</a>
+              </li>
+              <li>
+                <a style="color: white;" href="#">SAC</a>
+              </li>
+            </ul>
+            <a style="color: white; margin-left: 20px;" href="{{ url_for('login') }}">Login Gestão</a>
+          </div>
+        </div>
+      </div>
+    <div class="container">
+        <h1>Informações de Contato</h1>
+        <div class="contact-info">
+            <p><strong>Endereço de E-mail:</strong> exemplo@email.com</p>
+            <p><strong>Telefone:</strong> (123) 456-7890</p>
+            <p><strong>Endereço:</strong> 123 Rua Principal, Cidade, Estado</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -9,8 +9,8 @@ class Usuario:
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
-from views.views_chat_pdf import *
-from  views.views_user import *
+from view_chat_pdf import *
+from  view_user import *
 
 if __name__ == '__main__':
      app.run(debug=True)

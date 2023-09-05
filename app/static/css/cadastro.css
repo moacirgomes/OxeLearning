@@ -1,7 +1,7 @@
-body {
+ /* Seus estilos CSS aqui */
+  body {
     background-color: #140f1c;
     color: white;
-  
   }
 
   .card-container {
@@ -15,7 +15,7 @@ body {
     color: white;
     background: rgb(32, 32, 36);
     width: 100%;
-    max-width: 600px;
+    max-width: 100%;
   }
 
   .card-title {
@@ -30,7 +30,7 @@ body {
   }
 
   .input-group-text {
-    background-color: #6B44C2;
+    background-color: #6b44c2;
     color: white;
   }
 
@@ -40,8 +40,8 @@ body {
 
   /* Confirm button styles */
   .btn-primary {
-    background-color: #6B44C2;
-    border-color: #6B44C2;
+    background-color: #6b44c2;
+    border-color: #6b44c2;
   }
 
   .btn-primary:disabled {
@@ -49,18 +49,22 @@ body {
     opacity: 0.5;
     cursor: not-allowed;
   }
-  
+
   /* Table and text styles */
   .table {
     background: rgb(32, 32, 32);
-    border: none; /* Remover as bordas da tabela */
+    color: none;
+    border: none;
+    /* Remover as bordas da tabela */
   }
-  
-  .table th, .table td {
+
+  .table th,
+  .table td {
     color: white;
     border: none;
     /* Remover as bordas das células */
   }
+
 
   /* Novos estilos para alinhar botões verticalmente */
   .btn-cell {
@@ -68,22 +72,24 @@ body {
     align-items: center;
     justify-content: center;
     height: 100%;
-  
   }
-.btn-cell button {
-  margin-right: 5px;
-  width: 80px;
-}
-.dropdown-toggle::after {
-      display: none;
-  }
-.modal-content{
-  background: rgb(32, 32, 36);
-  color: white;
-}
 
-.modal {
-  z-index: 1050;
-  align-items: center;
-  justify-content: center; /* Adjust as needed */
-}
+  .btn-cell button {
+    margin-right: 5px;
+    width: 80px;
+  }
+
+  .dropdown-toggle::after {
+    display: none;
+  }
+
+  .modal-content {
+    background: rgb(32, 32, 36);
+    color: white;
+  }
+
+  .modal {
+    z-index: 1050;
+    align-items: center;
+    justify-content: center;
+  }

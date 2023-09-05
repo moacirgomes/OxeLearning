@@ -15,16 +15,13 @@ def pesquisar():
         # Itera sobre os arquivos disponíveis e envia a pergunta para cada um
         for item in responseLista.json()["files"]:
             headers = {'Content-Type': 'application/json; charset=utf-8', 'Accept-Encoding': 'gzip, deflate, br'} 
-            dados = {'sourceId': f"{item['sourceID']}", 'message': data.get('pesquisa'), 'assistent': 'gere o retorno em JSON com o campo reposta'}
+            dados = {'sourceId': f"{item['sourceID']}", 'message': data.get('pesquisa'), 'assistent': 'você faz parte da administração da faculdade e esta respondendo a um aluno, na resposta não precisa trazer o número da página e ignore também as respostas anteriores'}
             endpoint_url = "https://backend-oxelearning.deyvessoncarlos.repl.co/chatMessage"
             response = requests.post(endpoint_url, json=dados, headers=headers)
             response.content.decode('utf-8')
-            try:
-                resposta = json.loads(response.json()["response"])
-                retorno = resposta["resposta"]
-                break
-            except json.JSONDecodeError as e:
-                retorno = response.json()["response"]
+           
+            retorno = response.json()["response"]
+            break
         return retorno    
     else:
         return "Desculpe, não foi possível encontrar algo referente à sua pergunta!"
@@ -40,25 +37,27 @@ def cadastro():
     file = request.files['file']
      
     if file.filename == '':
-        flash('No selected file')
-       
+        flash('No selected file') 
     nome = request.form.get('nomeArquivo')
+    validarTipoArquivo(file.filename)
     if nome and file and file.filename.endswith('.pdf'):
-        file.save('uploads/' + file.filename)
-        files = {
-            'file': (file.filename, open(f"uploads/{file.filename}", 'rb'), 'application/pdf'),
-        }
-        backend_url = "https://backend-oxelearning.deyvessoncarlos.repl.co/uploadFile"
-        payload = {
-            'name': nome
-        }
-        response = requests.post(backend_url, files=files, data=payload)
-        files.clear()
-        if response.status_code == 201:
-            flash("PDF cadastrado com sucesso!")
-            responseLista = requests.get("https://backend-oxelearning.deyvessoncarlos.repl.co/getFiles")
-            salvarId = responseLista.json()["files"][-1]["sourceID"]      
-            os.rename(r'uploads/'+file.filename, r"uploads/" + salvarId + ".pdf" )   
+           
+            print(file.filename)
+            file.save('uploads/' + file.filename)
+            files = {
+                'file': (file.filename, open(f"uploads/{file.filename}", 'rb'), 'application/pdf'),
+            }
+            backend_url = "https://backend-oxelearning.deyvessoncarlos.repl.co/uploadFile"
+            payload = {
+                'name': nome
+            }
+            response = requests.post(backend_url, files=files, data=payload)
+            files.clear()
+            if response.status_code == 201:
+                flash("PDF cadastrado com sucesso!")
+                responseLista = requests.get("https://backend-oxelearning.deyvessoncarlos.repl.co/getFiles")
+                salvarId = responseLista.json()["files"][-1]["sourceID"]      
+                os.rename(r'uploads/'+file.filename, r"uploads/" + salvarId + ".pdf" )
              
     return redirect('/inicial_gestao')
 
@@ -85,3 +84,10 @@ def removeArquivo(id):
         flash('Arquivo não encontrado na base de dados!')  
        
              
+def validarTipoArquivo(file):
+    novoFile = file.split('.')
+    print(novoFile)
+    if novoFile[1].lower() != "pdf":
+        flash('Selecione um Arquivo do Tipo PDF!')
+    return redirect('/inicial_gestao')
+

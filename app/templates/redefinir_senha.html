@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Recuperar Senha</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/brootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/alterar_senha.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+</head>
+<body>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+          <div class="vw-plugin-top-wrapper"></div>
+        </div>
+      </div>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="flash-message" class="alert {% if 'incorretos' in messages[0] %}alert-danger{% elif 'Email não cadastrado' in messages[0] %}alert-danger{% else %}alert-success{% endif %} position-absolute top-0 end-0 me-3 mt-3">
+                {{ messages[0] }}
+                <button id="close-button" type="button" class="btn-close my-1 me-1"
+                    style="font-size: 0.75rem;" aria-label="Fechar"></button>
+            </div>
+        {% endif %}
+        {% endwith %}
+        <div class="card-container">
+            <div class="card p-5 rounded">
+                <img src="../static/img/logo.png" alt="Imagem Centralizada" class="img-centralizada" />
+                <form method="post" action="/resetPassword">
+                    <h2 class="card-title">Recuperar senha</h2>
+                    <!-- Campo Email -->
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                        </div>
+                    </div>
+                    <!-- Botão de Confirmar -->
+                    <div class="form-group text-center">
+                        <button
+                            type="submit"
+                            class="btn btn-primary btn-block"
+                            id="recuperar"
+                            disabled
+                        >
+                          Recuperar
+                        </button>
+                    </div>
+                </form>
+                <a class="nav-link text-secondary text-center" href="{{url_for('login')}}">Voltar</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="static\js\alterar_senha.js"></script>
+    <script src="../static/js/time.js"></script>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script src="../static/js/libras.js"></script>
+    <script src="../static/js/redefinir_senha.js"></script>
+</body>
+</html>

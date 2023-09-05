@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro de Usuários</title>
+  <!-- Include Bootstrap CSS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+  <link rel="stylesheet" type="text/css" href="static/css/brootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="static/css/cadastro.css" />
+</head>
+<body>
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="z-index: 1001">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('index') }}">
+        <img src="../static/img/home.png" alt="OxeLearning" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-light" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg">
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="{{ url_for('index') }}">Home</a>
+          </li>
+          
+          <li class="nav-item"><a class="nav-link text-light" href="{{ url_for('cadastrar') }}">Cadastrar Gestor</a></li>
+          
+        <!--  <li class="nav-item">
+            <a class="nav-link text-light" href="#">Perguntas Frequentes</a>
+          </li> -->
+          <li>
+            <a class="nav-link active text-light"  href="{{ url_for('index_gestao') }}">Arquivos</a>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">SAC</a>
+          </li>
+        </ul>
+        <!-- Move the user dropdown and its associated buttons here -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static"
+            aria-expanded="true">
+            <i class="fas fa-user fa-2x"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg bg-dark">
+           <!-- <li><a class="dropdown-item bg-dark text-light" href="#" data-bs-toggle="modal" data-bs-target="#passwordChangeModal">Alterar Senha</a></li> -->
+            <li><a class="dropdown-item bg-dark text-light" href="{{ url_for('logout') }}">Sair</a></li>
+          </ul>
+        </div>
+        <!-- ... rest of the code ... -->
+      </div>
+    </div>
+  </nav>
+<div class="container mt-5">
+  <h1 class="card-title">Cadastro de Gestores</h1>
+  <button id="btnCadastrar" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#cadastroUsuarioModal">
+    Cadastrar Usuário
+  </button>
+  <div class="card mb-5 p-5 rounded">
+    <input type="text" id="filtro" class="form-control mb-3" placeholder="Filtrar por nome do arquivo">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Nivel</th>
+          <!--  <th class="text-center">Editar</th> -->
+            <th class="text-center">Excluir</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-corpo">
+          {% for usuario in arquivos.files %}
+          <tr>
+            <td>{{ usuario.name }}</td>
+            <td>{{ usuario.user }}</td>
+            <td>
+              {% if usuario.admin %}
+                Administrador
+              {% else %}
+                Gestor
+              {% endif %}
+            </td>
+           <!-- <td class="btn-cell">
+              <a class="btn btn-primary btn-sm editar-usuario" data-bs-toggle="modal" data-bs-target="#editarModal"
+                data-id="{{ usuario.id }}">
+                <i class="fas fa-pencil-alt"></i>
+              </a> -->
+            </td>
+            <td class="text-center">
+              <form action="{{ url_for('deletarUser', id=usuario.userID ) }}" method="post" style="display: inline;">
+                <button class="btn btn-danger btn-sm " type="submit">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div class="mb-2"></div>
+      <div id="flash-message"
+        class="alert {% if 'Selecione um Arquivo' in messages[0] %}alert-warning{% else %}alert-success{% endif %}">
+        {{ messages[0] }}
+        <button id="close-button" type="button" class="btn-close my-1 me-3"
+          style="position: absolute; right: 0;  font-size: 0.75rem; " aria-label="Fechar"></button>
+      </div>
+      {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Cadastro de Usuário -->
+<div class="modal fade" id="cadastroUsuarioModal" tabindex="-1" aria-labelledby="cadastroUsuarioModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="/cadastro_user" method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cadastroUsuarioModalLabel">Cadastrar Novo Usuário</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nomeUsuario">Nome do Usuário:</label>
+            <input type="text" required class="form-control" name="nomeUsuario" id="nomeUsuario"
+              placeholder="Digite o nome do usuário" />
+          </div>
+          <div class="form-group">
+            <label for="emailUsuario">Email:</label>
+            <input type="email" required class="form-control" name="emailUsuario" id="emailUsuario"
+              placeholder="Digite o email do usuário" />
+          </div>
+          <div class="form-group">
+            <label for="senhaUsuario">Senha:</label>
+            <input type="password" required class="form-control" name="senhaUsuario" id="senhaUsuario"
+              placeholder="Digite a senha do usuário" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btnSalvarUsuario">Salvar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Include Bootstrap JS -->
+<script src="../static/js/close.js"></script>
+<script src="static/css/brootstrap/js/bootstrap.bundle.js"></script>
+<script src="../static/js/time.js"></script>
+<script src="../static/js/main.js"></script>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+</body>
+</html>

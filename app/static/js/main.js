@@ -1,35 +1,3 @@
-/* Conteúdo do arquivo main.js */
-/*
-document.getElementById("search-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    var searchInput = document.getElementById("search-input").value;
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/search", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-            var resultado = response.resultado;
-            document.getElementById("search-result").textContent = resultado;
-        }
-    };
-    var data = "search=" + encodeURIComponent(searchInput);
-    xhr.send(data);
-});
-document.getElementById('clear-button').addEventListener('click', function() {
-    document.getElementById('search-input').value = '';
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    var menuButton = document.querySelector('.menu-button');
-    var menuItems = document.querySelector('.menu-items');
-
-    menuButton.addEventListener('click', function() {
-        menuItems.classList.toggle('show');
-    });
-
-});
-*/
 $(document).ready(function(){
     $("#filtro").on("keyup", function() {
       var value = $(this).val().toLowerCase();

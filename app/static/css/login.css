@@ -40,10 +40,12 @@ h1 {
     opacity: 0.8;
     transition: opacity 0.2s ease 0s;
     align-self: flex-start;
+    
 }
 
 .bnZtLN a:hover {
-    background-color: #6b44c2;
+    
+    color: #6b44c2;
 }
 
 .btn-primary {
@@ -102,4 +104,8 @@ h1 {
 
 .password-toggle {
     cursor: pointer;
+}
+
+.form-control{
+    font-size: 18px;
 }

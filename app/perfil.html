@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Usuários</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Seus estilos CSS aqui */
+    body {
+      background-color: #140f1c;
+      color: white;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      color: white;
+      background: rgb(32, 32, 36);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .card-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Form styles */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group-text {
+      background-color: #6B44C2;
+      color: white;
+    }
+
+    .password-toggle {
+      cursor: pointer;
+    }
+
+    /* Confirm button styles */
+    .btn-primary {
+      background-color: #6B44C2;
+      border-color: #6B44C2;
+    }
+
+    .btn-primary:disabled {
+      background-color: #6b44c2;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Table and text styles */
+    .table {
+      background: rgb(32, 32, 36);
+      color: white;
+    }
+
+    .table th, .table td {
+      color: white;
+    }
+
+    /* Novos estilos para alinhar botões verticalmente */
+    .btn-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .btn-cell button {
+      margin-right: 5px;
+      width: 80px;
+    }
+
+    .dropdown-toggle::after {
+      display: none;
+    }
+
+    .modal-content{
+      background: rgb(32, 32, 36);
+      color: white;
+    }
+
+    .modal {
+      z-index: 1050;
+      align-items: center;
+      justify-content: center;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h1 class="card-title">Cadastro de Usuários</h1>
+
+  <button class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#cadastroUsuarioModal">Cadastrar Usuário</button>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Admin</th>
+        <th>Editar</th>
+        <th>Excluir</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Dados dos usuários serão adicionados dinamicamente aqui -->
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal de Cadastro de Usuário -->
+<div class="modal fade" id="cadastroUsuarioModal" tabindex="-1" aria-labelledby="cadastroUsuarioModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cadastroUsuarioModalLabel">Cadastrar Novo Usuário</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="nomeUsuario">Nome do Usuário</label>
+            <input type="text" class="form-control" id="nomeUsuario" placeholder="Digite o nome do usuário">
+          </div>
+          <div class="form-group">
+            <label for="emailUsuario">Email</label>
+            <input type="email" class="form-control" id="emailUsuario" placeholder="Digite o email do usuário">
+          </div>
+          <div class="form-group">
+            <label for="senhaUsuario">Senha</label>
+            <input type="password" class="form-control" id="senhaUsuario" placeholder="Digite a senha do usuário">
+          </div>
+          <div class="form-group">
+            <label for="funcaoUsuario">Função</label>
+            <select class="form-control" id="funcaoUsuario">
+              <option value="normal">Normal</option>
+              <option value="adm">Admin</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Cadastrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Include Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
